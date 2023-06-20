@@ -1,0 +1,102 @@
+// On Load Form
+let tailSelect = tail.select("#select_multi_plant_name", {
+    multiShowCount: true,
+    multiSelectAll: true,
+    search: true,
+    width: "70%",
+    placeholder: 'Select a Plant'
+  });
+//Reset From
+function clearForm() {
+        document.getElementById("select_multi_plant_name").required = false;
+ 
+	   var elements = document.getElementById("select_multi_plant_name").selectedOptions;
+	   for(var i = 0; i < elements.length; i++) {
+          elements[i].selected = false;
+        }
+		$("#adminForm").trigger("reset");
+}
+
+
+function chk() {
+// After testing remove the commented line
+	$("#select_multi_plant_name").prop("checked", true);
+//document.getElementById("select_multi_plant_name").checked=true;
+
+}
+
+$('input[name=admin_access]').change(function(){
+    if($(this).is(':checked')) {
+		$("#regional_access").prop("checked", true);
+		$("#regular_access").prop("checked", true);
+    } else {
+		$("#regional_access").prop("checked", false);
+    }   $("#regular_access").prop("checked", true);
+});
+
+
+
+$('input[name=regular_access]').change(function(){
+    if($(this).is(':checked')) {
+		$("#regional_access").prop("checked", false);
+		$("#admin_access").prop("checked", false);
+    } else {
+		$("#regional_access").prop("checked", true);
+    }   $("#admin_access").prop("checked", false);
+});
+
+
+
+$('input[name=regional_access]').change(function(){
+    if($(this).is(':checked')) {
+
+		$("#admin_access").prop("checked", false);
+    } else {
+		$("#regular_access").prop("checked", true);
+        $("#admin_access").prop("checked", false);
+		$("#regional_access").prop("checked", false);
+	}
+	
+});
+
+
+/* Before deleting test this code
+$(document).ready(function() {
+    $(".dropdown-toggle").dropdown();
+});
+*/
+window.addEventListener("load", function(){
+    var element = document.getElementById("hidden_plant");
+ 
+    //If it isn't "undefined" and it isn't "null", then it exists.
+    if(typeof(element) != 'undefined' && element != null)
+	{
+       	palnt_names=document.getElementById('hidden_plant').value;
+		splited_plant_names =palnt_names.split("~");
+		//splited_plant_names.forEach(s => tailSelect.options.select(s, "#")); old code
+		//new code
+		$.each(splited_plant_names, function(key, val) {
+		    return tailSelect.options.select(val, "#")
+		})
+    } 
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
